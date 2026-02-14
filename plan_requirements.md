@@ -44,13 +44,17 @@ A plan must contain the following:
   package.json                 (EDIT)
   ```
 
-## 4. Steps at end of implementation
+## 4. Test strategy
+
+- Number of tests and specific edge cases covered.
+
+## 5. Steps at end of implementation
 
 - **a)** Run any code review files found in `.cursor` or `cursor-files` that are relevant.
 - **b)** Fix results of code review.
 - **c)** Build the projects.
 
-## 5. Build steps
+## 6. Build steps
 
 - Include a concise list of build steps for each component/project.
 
@@ -65,6 +69,10 @@ A plan must contain the following:
   2. npm install
   3. npm run build
 
-## 6. Release updates
+## 7. Release updates
 
 - Include a step to **update release versions/release notes** (check `.cursor` or `cursor-files` for relevant config/instructions).
+
+## 8. Screenshots (web/UI changes only)
+
+- Tell the agent: "Run the app, open the local URL in the browser, and take a screenshot of the homepage so I can see the UI."
