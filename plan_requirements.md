@@ -74,6 +74,30 @@ A plan must contain the following:
 
   Within a phase, items with no dependency on each other can be done in parallel. Items that depend on different prior items become available as soon as their prerequisites are done.
 
+  **Example (Mermaid, vertical):**
+  ```mermaid
+  flowchart TB
+    subgraph P1["Phase 1 (parallel)"]
+      1A[1A Repo / project setup]
+      1B[1B API contracts + DB schema]
+    end
+    subgraph P2["Phase 2 (parallel)"]
+      2A[2A Backend API]
+      2B[2B Auth module]
+      2C[2C Seed data / migrations]
+    end
+    subgraph P3["Phase 3 (parallel)"]
+      3A[3A Frontend app]
+      3B[3B E2E tests / docs]
+    end
+    1B --> 2A
+    1B --> 2C
+    1A --> 2B
+    2A --> 3A
+    2B --> 3A
+    2A --> 3B
+  ```
+
 ## 6. Steps at end of implementation
 
 - **a)** Run any code review files found in `.cursor` or `cursor-files` that are relevant.
