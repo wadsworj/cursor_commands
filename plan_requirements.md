@@ -54,25 +54,25 @@ A plan must contain the following:
 - Clearly distinguish:
   - **In parallel:** Tasks that have no dependency on each other and can be done at the same time (e.g. by one agent in any order, or by multiple agents).
   - **Sequential:** Tasks that depend on earlier steps and must be done in a defined order.
-- Use a structure that makes dependencies explicit (e.g. phases, numbered steps with “after step N”, or a Mermaid diagram).
+- Use a vertical breakdown by phase. Within each phase, list components and their dependencies on earlier phases so it is clear what can be done in parallel.
 
-  **Example (Mermaid):**
-  ```mermaid
-  flowchart LR
-    subgraph parallel1["Phase 1 (parallel)"]
-      A[API contracts]
-      B[DB schema]
-      C[Auth module]
-    end
-    subgraph sequential["Phase 2 (sequential)"]
-      D[Backend API] --> E[Frontend]
-    end
-    parallel1 --> D
+  **Example (vertical breakdown):**
+  ```
+  Phase 1 (all in parallel)
+  ├── 1A  Repo / project setup
+  └── 1B  API contracts + DB schema
+
+  Phase 2 (depends on Phase 1; 2A/2B/2C in parallel with each other)
+  ├── 2A  Backend API          (depends on 1B)
+  ├── 2B  Auth module          (depends on 1A)
+  └── 2C  Seed data / migrations (depends on 1B)
+
+  Phase 3 (depends on Phase 2; 3A/3B in parallel)
+  ├── 3A  Frontend app         (depends on 2A, 2B)
+  └── 3B  E2E tests / docs    (depends on 2A)
   ```
 
-  **Example (list):**
-  - **Phase 1 (parallel):** Set up repo, define API contracts, design DB schema.
-  - **Phase 2 (after Phase 1):** Implement backend API; then implement frontend (sequential after API).
+  Within a phase, items with no dependency on each other can be done in parallel. Items that depend on different prior items become available as soon as their prerequisites are done.
 
 ## 6. Steps at end of implementation
 
